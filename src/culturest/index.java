@@ -9,7 +9,13 @@ import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 /**
@@ -164,22 +170,25 @@ public class index extends javax.swing.JFrame {
     }//GEN-LAST:event_exitActionPerformed
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
-        // Obtener el texto del cuadro de texto
-    String texto = expediente.getText();
-    try (BufferedWriter writer = new BufferedWriter(new FileWriter("expedientes.txt", true))) {
-        // Escribir el texto en el archivo "expedientes.txt"
-        writer.write(texto);
-        // Agregar un salto de línea para separar los expedientes
-        writer.newLine();
-    } catch (IOException ex) {
-        // Manejar las excepciones en caso de error al escribir en el archivo
-        ex.printStackTrace();
-    } 
+        try {
+    FileWriter escribir = new FileWriter("archivo.txt", true);
+            String texto = expediente.getText().replace("\n","\r\n");
+            PrintWriter imprime = new PrintWriter(escribir); 
+            imprime.print(texto); // Escribir el texto en el archivo
+            imprime.println(); // Agregar un salto de línea
+            imprime.close(); // Cerrar el archivo
+            expediente.setText("");
+            JOptionPane.showMessageDialog(null, "Guardado Con Exito");
+            
+        } catch (Exception ex) {
+            Logger.getLogger(index.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_saveActionPerformed
 
     private void convActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_convActionPerformed
-        // TODO add your handling code here:
-        System.out.println("Guardando expediente...");
+       convertidor cambio = new convertidor();
+       cambio.setVisible(true);
+       dispose();
     }//GEN-LAST:event_convActionPerformed
 
     /**
