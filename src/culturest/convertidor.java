@@ -122,7 +122,6 @@ public class convertidor extends javax.swing.JFrame {
     }//GEN-LAST:event_archivoActionPerformed
 
     private void csvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_csvActionPerformed
-    
         
         try (BufferedReader reader = new BufferedReader(new FileReader("document"));
              BufferedWriter writer = new BufferedWriter(new FileWriter("archivo.csv"))) {
